@@ -1,10 +1,11 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <h2>All Users page</h2>
+    <main className='font-works-sans'>
+      <Navbar />
       {children}
-    </div>
+    </main>
   )
 }
