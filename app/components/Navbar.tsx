@@ -1,4 +1,4 @@
-import { auth, signOut } from '@/auth'
+import { auth, signIn, signOut } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -18,14 +18,23 @@ export default async function Navbar() {
               <Link href='/startup/create'>
                 <span>Create</span>
               </Link>
-              <button onClick={signOut}>
+              <button onClick={() => signOut}>
                 <span>Logout</span>
               </button>
               <Link href={`/user/${session?.id}`}>
                 <span>{session?.user?.name}</span>
               </Link>
             </>
-          ) : null}
+          ) : (
+            <form
+              action={async () => {
+                'use server'
+                await signIn('github')
+              }}
+            >
+              <button type='submit'>Login</button>
+            </form>
+          )}
         </div>
       </nav>
     </header>
